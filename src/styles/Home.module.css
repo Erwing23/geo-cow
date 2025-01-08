@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  height: 100vh; /* Toda la altura del viewport */
+  overflow: hidden;
+}
+
+.container > :first-child {
+  flex: 0 0 300px; /* Sidebar con ancho fijo */
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.container > :last-child {
+  flex: 1; /* Mapa ocupa el espacio restante */
+}
