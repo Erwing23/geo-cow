@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next dev",
-    "build": "next build",
+    "init-db": "node src/scripts/initDB.js",
+    "build": "npm run init-db && next build",
     "start": "next start",
     "lint": "next lint"
   },
