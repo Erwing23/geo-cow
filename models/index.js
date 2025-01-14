@@ -17,7 +17,6 @@ const config = {
   host: process.env.DB_HOST || "127.0.0.1",
   dialect: process.env.DB_DIALECT || "postgres",
 };
-console.log("config", config);
 
 if (process.env.DATABASE_URL) {
   // If DATABASE_URL is provided (e.g., for production on platforms like Heroku), use it
