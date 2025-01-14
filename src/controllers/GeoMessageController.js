@@ -52,7 +52,12 @@ const getGeoMessageByNode = async (req, res) => {
   const { node } = req.query;
   try {
     const geoMessages = await db.GeoMessage.findAll({
-      where: { node: node }, // Find all GeoMessages with the specified node
+      where: {
+        node: node,
+        recievedAt: {
+          [db.Sequelize.Op.gte]: new Date(new Date() - 24 * 60 * 60 * 1000), // Last 24 hours
+        },
+      }, // Find all GeoMessages with the specified node
     });
     if (geoMessages.length === 0) {
       return res.status(404).json({ error: "GeoMessages not found" });

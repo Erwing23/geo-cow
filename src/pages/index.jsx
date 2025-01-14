@@ -62,7 +62,6 @@ export default function Home() {
           params: { node: targetNode },
         });
         setgeoMessagesByNode(response.data); // Set state with fetched data
-        console.log(response.data); // Set state with fetched data
       } catch (error) {
         console.log("Failed to fetch GeoMessages FE2:", error);
       }
@@ -70,9 +69,6 @@ export default function Home() {
     if (targetNode) {
       fetchData();
     }
-
-    console.log("Updated MQTT Messages:", targetNode);
-    console.log("Updated MQTT Messages:", geoMessagesByNode);
   }, [targetNode]); // Only runs when mqttMessages changes
   return (
     <div className={styles.container}>
