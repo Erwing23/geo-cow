@@ -2,7 +2,7 @@ import path from "path";
 import { Server } from "socket.io";
 require("pg");
 import { getMqttClient } from "../../lib/mqttClient";
-const { sequelize, models } = require("../../../models");
+const db = require("../../../models");
 let socketIoInitialized = false;
 var counter = 0;
 export default async function handler(req, res) {
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     mqttClient.on("message", (topic, message) => {
       const payload = manipulateMqttMessage(topic, message);
       io.emit("mqtt-message", { topic, message: payload });
-      models.GeoMessage.create({
+      db.GeoMessage.create({
         node: topic,
         pasos: payload.pasos,
         latitud: payload.lat,
