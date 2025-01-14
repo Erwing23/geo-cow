@@ -1,7 +1,7 @@
 import path from "path";
 import { Server } from "socket.io";
 import { getMqttClient } from "../../lib/mqttClient";
-const { sequelize, models } = require("../../models");
+const { sequelize, models } = require("../../../models");
 let socketIoInitialized = false;
 var counter = 0;
 export default async function handler(req, res) {

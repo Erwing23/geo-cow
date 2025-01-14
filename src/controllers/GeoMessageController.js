@@ -1,12 +1,12 @@
 // src/controllers/GeoMessageController.js
 
-const { models } = require("../models"); // Assuming GeoMessage is initialized properly
+const db = require("../../models"); // Not destructured
 
 // Create a new GeoMessage
 const createGeoMessage = async (req, res) => {
   try {
     const { node, latitud, longitud, recievedAt } = req.body;
-    const geoMessage = await GeoMessage.create({
+    const geoMessage = await db.GeoMessage.create({
       node,
       latitud,
       longitud,
@@ -22,7 +22,7 @@ const createGeoMessage = async (req, res) => {
 // Get all GeoMessages
 const getAllGeoMessages = async (req, res) => {
   try {
-    const geoMessages = await models.GeoMessage.findAll();
+    const geoMessages = await db.GeoMessage.findAll();
 
     return res.status(200).json(geoMessages);
   } catch (error) {
@@ -35,7 +35,7 @@ const getAllGeoMessages = async (req, res) => {
 const getGeoMessageById = async (req, res) => {
   const { id } = req.query;
   try {
-    const geoMessage = await models.GeoMessage.findByPk(id);
+    const geoMessage = await db.GeoMessage.findByPk(id);
 
     if (!geoMessage) {
       return res.status(404).json({ error: "GeoMessage not found" });
@@ -51,7 +51,7 @@ const getGeoMessageById = async (req, res) => {
 const getGeoMessageByNode = async (req, res) => {
   const { node } = req.query;
   try {
-    const geoMessages = await models.GeoMessage.findAll({
+    const geoMessages = await db.GeoMessage.findAll({
       where: { node: node }, // Find all GeoMessages with the specified node
     });
     if (geoMessages.length === 0) {
@@ -69,7 +69,7 @@ const updateGeoMessage = async (req, res) => {
   const { id } = req.query;
   const { node, latitud, longitud, recievedAt } = req.body;
   try {
-    const geoMessage = await GeoMessage.findByPk(id);
+    const geoMessage = await db.GeoMessage.findByPk(id);
     if (!geoMessage) {
       return res.status(404).json({ error: "GeoMessage not found" });
     }
@@ -91,7 +91,7 @@ const updateGeoMessage = async (req, res) => {
 const deleteGeoMessage = async (req, res) => {
   const { id } = req.query;
   try {
-    const geoMessage = await GeoMessage.findByPk(id);
+    const geoMessage = await db.GeoMessage.findByPk(id);
     if (!geoMessage) {
       return res.status(404).json({ error: "GeoMessage not found" });
     }
