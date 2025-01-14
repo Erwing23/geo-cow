@@ -25,7 +25,7 @@ export default function ChartFooter({ geoMessagesByNode }) {
     <Box
       style={{
         height: "25vh", // Full viewport height
-        backgroundColor: "gray",
+        backgroundColor: "white",
       }}
     >
       {xTicks.length > 6 ? (
@@ -40,6 +40,7 @@ export default function ChartFooter({ geoMessagesByNode }) {
           ]}
           series={[
             {
+              color: "black",
               curve: "linear",
               data: yValues,
             },
