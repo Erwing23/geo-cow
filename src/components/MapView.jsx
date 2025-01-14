@@ -22,7 +22,7 @@ export default function MapView({ messages, geoMessages, geoMessagesByNode }) {
   // Map options to disable default UI elements
   const mapOptions = useMemo(
     () => ({
-      disableDefaultUI: true, // Disables all default UI
+      disableDefaultUI: false, // Disables all default UI
     }),
     []
   );
