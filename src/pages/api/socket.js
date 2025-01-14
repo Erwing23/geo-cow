@@ -1,5 +1,6 @@
 import path from "path";
 import { Server } from "socket.io";
+require("pg");
 import { getMqttClient } from "../../lib/mqttClient";
 const { sequelize, models } = require("../../../models");
 let socketIoInitialized = false;

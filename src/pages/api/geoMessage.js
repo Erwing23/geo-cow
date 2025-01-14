@@ -1,5 +1,5 @@
 // src/pages/api/geoMessages.js
-
+require("pg");
 import {
   createGeoMessage,
   getAllGeoMessages,
