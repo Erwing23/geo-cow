@@ -45,6 +45,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
+      temperature: {
+        type: DataTypes.FLOAT,
+        allowNull: true, // Optional
+        defaultValue: null, // Default to NULL if no value is provided
+      },
     },
     {
       sequelize,

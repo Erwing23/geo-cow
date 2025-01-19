@@ -28,6 +28,7 @@ export default async function handler(req, res) {
         latitud: payload.lat,
         longitud: payload.long,
         recievedAt: payload.receivedAt,
+        temperature: payload.temp,
         // Add other necessary fields here if required
       }).catch((error) => {
         console.error("Error saving message to the database:", error);
@@ -41,12 +42,14 @@ export default async function handler(req, res) {
 const manipulateMqttMessage = (topic, message) => {
   try {
     const parsedMessage = JSON.parse(message.toString()); // Parse the message if it's JSON
+    console.log(parsedMessage);
     const manipulatedMessage = {
       receivedAt: parsedMessage.received_at,
       id: counter++,
       pasos: parsedMessage.uplink_message.decoded_payload.pasos,
       lat: parsedMessage.uplink_message.decoded_payload.latitud,
       long: parsedMessage.uplink_message.decoded_payload.longitud,
+      temp: parsedMessage.uplink_message.decoded_payload.temperatura,
     };
 
     return manipulatedMessage;

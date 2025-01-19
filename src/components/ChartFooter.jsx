@@ -12,42 +12,57 @@ import {
 export default function ChartFooter({ geoMessagesByNode }) {
   // Map options to disable default UI elements
   const xTicks = geoMessagesByNode.map((item) => new Date(item.recievedAt)); // X-axis data (dates)
-  const yValues = geoMessagesByNode.map((item) => item.pasos);
-  console.log(yValues);
-  console.log(xTicks);
-
+  const yValuesPasos = geoMessagesByNode.map((item) => item.pasos);
+  const yValuesTemp = geoMessagesByNode.map((item) => item.temperature);
+  console.log(yValuesTemp);
   const dateFormatter = (tick) => {
     const date = new Date(tick);
     // Example format: "MM/dd/yyyy HH:mm"
-    return date.toLocaleString(); // Adjust the formatting based on your locale
+    return date.toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false, // Use 24-hour format
+    }); // Adjust the formatting based on your locale
   };
   return (
     <Box
+      display="flex"
       style={{
         height: "25vh", // Full viewport height
         backgroundColor: "white",
       }}
     >
       {xTicks.length > 6 ? (
-        <LineChart
-          xAxis={[
-            {
-              data: xTicks,
-              valueFormatter: dateFormatter,
-              label: "test",
-              scaleType: "datetime",
-            },
-          ]}
-          series={[
-            {
-              color: "black",
-              curve: "linear",
-              data: yValues,
-            },
-          ]}
-          width={1000}
-          height={300}
-        />
+        <>
+          <LineChart
+            yAxis={[{ label: "Pasos y Temperatura" }]}
+            xAxis={[
+              {
+                data: xTicks,
+                valueFormatter: dateFormatter,
+                label: "Tiempo",
+                scaleType: "date",
+              },
+            ]}
+            series={[
+              {
+                color: "black",
+                curve: "linear",
+                data: yValuesPasos,
+              },
+              {
+                color: "red",
+                curve: "linear",
+                data: yValuesTemp,
+              },
+            ]}
+            width={1600}
+            height={300}
+          />
+        </>
       ) : (
         <></>
       )}

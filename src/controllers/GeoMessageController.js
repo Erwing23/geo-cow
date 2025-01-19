@@ -58,6 +58,7 @@ const getGeoMessageByNode = async (req, res) => {
           [db.Sequelize.Op.gte]: new Date(new Date() - 24 * 60 * 60 * 1000), // Last 24 hours
         },
       }, // Find all GeoMessages with the specified node
+      order: [["recievedAt", "ASC"]], // Order by recievedAt in ascending order
     });
     if (geoMessages.length === 0) {
       return res.status(404).json({ error: "GeoMessages not found" });

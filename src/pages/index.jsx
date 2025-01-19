@@ -64,6 +64,7 @@ export default function Home() {
         setgeoMessagesByNode(response.data); // Set state with fetched data
       } catch (error) {
         console.log("Failed to fetch GeoMessages FE2:", error);
+        setgeoMessagesByNode([]); // Set state with fetched data
       }
     };
     if (targetNode) {
