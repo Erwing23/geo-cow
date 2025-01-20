@@ -18,6 +18,7 @@
     "@mui/material": "^6.3.1",
     "@mui/x-charts": "^7.23.2",
     "@react-google-maps/api": "^2.20.5",
+    "@turf/turf": "^7.2.0",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "fs": "^0.0.1-security",

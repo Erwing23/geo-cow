@@ -14,7 +14,6 @@ export default function ChartFooter({ geoMessagesByNode }) {
   const xTicks = geoMessagesByNode.map((item) => new Date(item.recievedAt)); // X-axis data (dates)
   const yValuesPasos = geoMessagesByNode.map((item) => item.pasos);
   const yValuesTemp = geoMessagesByNode.map((item) => item.temperature);
-  console.log(yValuesTemp);
   const dateFormatter = (tick) => {
     const date = new Date(tick);
     // Example format: "MM/dd/yyyy HH:mm"
@@ -36,7 +35,7 @@ export default function ChartFooter({ geoMessagesByNode }) {
       }}
     >
       {xTicks.length > 6 ? (
-        <>
+        <Box sx={{ boxShadow: 5, margin: 5, borderRadius: 5 }}>
           <LineChart
             yAxis={[{ label: "Pasos y Temperatura" }]}
             xAxis={[
@@ -62,7 +61,7 @@ export default function ChartFooter({ geoMessagesByNode }) {
             width={1600}
             height={300}
           />
-        </>
+        </Box>
       ) : (
         <></>
       )}
