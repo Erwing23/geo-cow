@@ -20,10 +20,21 @@ export default async function handler(req, res) {
 
     // Forward MQTT messages to WebSocket clients
     mqttClient.on("message", (topic, message) => {
+      const mqttTopics = [
+        "v3/startlabs-vaquita@ttn/devices/nodo-02/up",
+        "v3/startlabs-vaquita@ttn/devices/nodo-03/up",
+        "v3/startlabs-vaquita@ttn/devices/nodo-05/up",
+        "v3/startlabs-vaquita@ttn/devices/nodo-04/up",
+        "v3/startlabs-vaquita@ttn/devices/nodo-01/up",
+      ];
+      function getRandomTopic(topics) {
+        const randomIndex = Math.floor(Math.random() * topics.length);
+        return topics[randomIndex];
+      }
       const payload = manipulateMqttMessage(topic, message);
       io.emit("mqtt-message", { topic, message: payload });
       db.GeoMessage.create({
-        node: topic,
+        node: getRandomTopic(mqttTopics),
         pasos: payload.pasos,
         latitud: payload.lat,
         longitud: payload.long,
