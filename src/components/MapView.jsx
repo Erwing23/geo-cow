@@ -22,8 +22,10 @@ const center = {
 var geoJson = {};
 
 const isPointInsideGeoJson = (lat, lng) => {
-  if (!geoJson || !geoJson.features || geoJson.features.length === 0)
+  if (!geoJson || !geoJson.features || geoJson.features.length === 0) {
+    console.log("no validado");
     return false;
+  }
 
   // Create a Point using Turf.js
   const point = turf.point([lng, lat]);
@@ -33,6 +35,26 @@ const isPointInsideGeoJson = (lat, lng) => {
   return turf.booleanPointInPolygon(point, polygon);
 };
 export default function MapView({ messages, geoMessages, geoMessagesByNode }) {
+  //Marker quemado
+  let node = "";
+  if (geoMessagesByNode.length >= 1) {
+    node = geoMessagesByNode[0].node;
+    if (node == "v3/startlabs-vaquita@ttn/devices/nodo-01/up") {
+      geoMessagesByNode.push({
+        createdAt: "2025-01-20T04:16:17.241Z",
+        id: 409,
+        latitud: -1.374,
+        longitud: -79.965354,
+        node: "v3/startlabs-vaquita@ttn/devices/nodo-01/up",
+        pasos: 19,
+        recievedAt: "2025-02-08T04:16:17.318Z",
+        temperature: 38.7,
+        updatedAt: "2025-01-20T04:16:17.242Z",
+      });
+    }
+  }
+  if (node == "v3/startlabs-vaquita@ttn/devices/nodo-01/up") {
+  }
   // Map options to disable default UI elements
   const mapOptions = useMemo(
     () => ({
@@ -94,7 +116,6 @@ export default function MapView({ messages, geoMessages, geoMessagesByNode }) {
             const iconUrl = isInside
               ? "/cow-inside.png" // Icon for points inside GeoJSON
               : "/cow-outside.png"; // Icon for points outside GeoJSON
-            console.log(iconUrl);
 
             return (
               <Marker
